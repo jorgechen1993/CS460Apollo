@@ -5,15 +5,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-//test 1
-//test 2
 public class MainActivity extends Activity {
 
+	private Thread t = null;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        t = new Thread(background);
+        t.start();
     }
+    
+	private Runnable background = new Runnable() {
+		public void run(){
+		BarTable bar = new BarTable();
+		bar.getData();
+		}
+	};
 
 
     @Override
