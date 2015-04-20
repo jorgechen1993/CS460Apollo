@@ -4,5 +4,11 @@
     <string name="app_name">CS460ApolloPubCrawl</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_activity_pub_crawl">PubCrawl</string>
+    <string name="title_activity_select_line">SelectLine</string>
+    <string name="title_activity_select_pubs">SelectPubs</string>
+    <string name="title_activity_select_stop">SelectStop</string>
+    <string name="title_activity_random_pub_crawl">RandomPubCrawl</string>
 
 </resources>

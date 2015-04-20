@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class BarSQLHelper extends SQLiteOpenHelper {
 	
-	public static final String DATABASE_NAME = "cs460apollo";
+	public static final String DATABASE_NAME = "cs460apollo.db";
 	public static final int DATABASE_VERSION = 4;
 	public static final String TABLE_NAME = "bar";
 	public static final String KEY_BAR_ID = "Bar_ID";
@@ -22,20 +22,12 @@ public class BarSQLHelper extends SQLiteOpenHelper {
 	public static final String KEY_TYPE = "Type";
 	public static final String KEY_CLOSEST_STOP = "ClosestStop";
 	public static final String CREATE_TABLE = "CREATE TABLE bar ("
-			+ KEY_BAR_ID + " text," + "," + KEY_LOCATION_NAME + " text," + KEY_BAR_LATITUDE + " text,"
+			+ KEY_BAR_ID + " text," + KEY_LOCATION_NAME + " text," + KEY_BAR_LATITUDE + " text,"
 			+ KEY_BAR_LONGITUDE + " text,"+ KEY_ADDRESS + " text," + KEY_PHONE + " text," 
 			+ KEY_TYPE + " text," + KEY_CLOSEST_STOP + " text);";
 	
 	private ContentValues values;
-	public BarTable barRecord = new BarTable();
-	private ArrayList<String> barIDArray = barRecord.getBarIDArray();
-	private ArrayList<String> locationNameArray = barRecord.getLocationNameArray();
-	private ArrayList<String> barLatitudeArray = barRecord.getBarLatitudeArray();
-	private ArrayList<String> barLongitudeArray = barRecord.getBarLongitudeArray();
-	private ArrayList<String> addressArray = barRecord.getAddressArray();
-	private ArrayList<String> phoneArray = barRecord.getPhoneArray();
-	private ArrayList<String> typeArray = barRecord.getTypeArray();
-	private ArrayList<String> closestStopArray = barRecord.getClosestStopArray();
+
 	
 	public BarSQLHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,6 +36,7 @@ public class BarSQLHelper extends SQLiteOpenHelper {
 	//called to create table
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 		String sql = CREATE_TABLE;
 		Log.d("SQLiteDemo", "onCreate: " + sql);
 		db.execSQL(sql);
@@ -61,25 +54,34 @@ public class BarSQLHelper extends SQLiteOpenHelper {
 	}
 	
 	//add bar records to the table
-	public void addBar(){
-		int pointer = 0;
-		int size = barIDArray.size();
+	public void addBar(ArrayList<Bar> list){
 		
-		for (int i = 0; i < size; i++){
+		for (int i = 0; i < list.size(); i++){
+			Bar bar = list.get(i);
+			String id, name, latitude, longitude, address, phone, type, closestStop;
+			id = bar.getBarID();
+			name = bar.getLocationName();
+			latitude = bar.getBarLatitude();
+			longitude = bar.getBarLongitude();
+			address = bar.getAddress();
+			phone = bar.getPhone();
+			type = bar.getType();
+			closestStop = bar.getClosestStop();
 			SQLiteDatabase db = this.getWritableDatabase();
 			values = new ContentValues();
-			values.put(KEY_BAR_ID, barIDArray.get(pointer));
-			values.put(KEY_LOCATION_NAME, locationNameArray.get(pointer));
-			values.put(KEY_BAR_LATITUDE, barLatitudeArray.get(pointer));
-			values.put(KEY_BAR_LONGITUDE, barLongitudeArray.get(pointer));
-			values.put(KEY_ADDRESS, addressArray.get(pointer));
-			values.put(KEY_PHONE, phoneArray.get(pointer));
-			values.put(KEY_TYPE,typeArray.get(pointer));
-			values.put(KEY_CLOSEST_STOP, closestStopArray.get(pointer));
+			
+			//adds the record into SQLite Database
+			values.put(KEY_BAR_ID, id);
+			values.put(KEY_LOCATION_NAME, name);
+			values.put(KEY_BAR_LATITUDE, latitude);
+			values.put(KEY_BAR_LONGITUDE, longitude);
+			values.put(KEY_ADDRESS, address);
+			values.put(KEY_PHONE, phone);
+			values.put(KEY_TYPE,type);
+			values.put(KEY_CLOSEST_STOP, closestStop);
 			db.insert(TABLE_NAME, null, values);
-			Log.d("SQLiteDemo", barIDArray.get(pointer) + " added");
+			Log.d("SQLiteDemo Bar", name + " added");
 	        db.close();
-	        pointer++;
 		}
 	}
 

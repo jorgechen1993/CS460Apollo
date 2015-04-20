@@ -45,7 +45,7 @@ public class Bar implements Serializable{
 		this.barLatitude = barLatitude;
 	}
 	
-	public String gerBarLatitude(){
+	public String getBarLatitude(){
 		return barLatitude;
 	}
 	

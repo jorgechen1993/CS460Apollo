@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="C:/Users/Jorge/Documents/Spring 2015/CS480/Class Material/Week 7/mysql-connector-java-5.1.24-bin.jar"/>
+	<classpathentry kind="lib" path="C:/adt-bundle-windows-x86_64-20140702/sdk/extras/android/support/v13/android-support-v13.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
