@@ -8,6 +8,7 @@ import java.io.Serializable;
 /**
  * @author Jorge
  *this class does not work - remember to remove
+ * test again
  */
 public class BarToTStop implements Serializable {
 	
