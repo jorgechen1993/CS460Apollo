@@ -273,6 +273,9 @@ public class RandomPubCrawl extends Activity implements OnClickListener {
 	    return false;
 	}
 	
+	/**
+	 * Gets bars from SQLite Database
+	 */
 	public void getBars() {
 		Cursor cursor;
 		
@@ -319,7 +322,7 @@ public class RandomPubCrawl extends Activity implements OnClickListener {
 		//Generate a random list of bars
 		for (int i = 0; i < crawl_size; i++) {
 			
-			int random = (int)((Math.random() * (tempArray.size() - 1 )) + 0);
+			int random = (int)(Math.random() * tempArray.size() + 0);
 			
 			tempArray2.add(tempArray.get(random));
 			tempArray.remove(random);									
@@ -342,7 +345,7 @@ public class RandomPubCrawl extends Activity implements OnClickListener {
 		//Generate a random list of bars
 		for (int i = 0; i < crawl_size; i++) {
 			
-			int random = (int)((Math.random() * (tempArray.size() - 1 )) + 0);
+			int random = (int)(Math.random() * tempArray.size() + 0);
 			
 			tempArray2.add(tempArray.get(random));
 			tempArray.remove(random);									
