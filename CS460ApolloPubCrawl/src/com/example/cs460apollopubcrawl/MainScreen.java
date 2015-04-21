@@ -1,3 +1,11 @@
+/**
+ * Main screen activity that displays the options of creating a random pub crawl
+ * or creating a custom pub crawl by the user
+ * 
+ * Created by Jorge Chen on 04/15/2015
+ * 
+ */
+
 package com.example.cs460apollopubcrawl;
 
 import android.app.Activity;
@@ -33,6 +41,11 @@ public class MainScreen extends Activity implements OnClickListener {
 
 	}
 	
+	/**
+	 * Method that handles button listeners.
+	 * button1: clicked by the user if the user wants a random pub crawl
+	 * button2: clicked by the user if the user wants to create a custom pub crawl
+	 */
     public void onClick(View v) {
     	
     	switch (v.getId()){
@@ -49,8 +62,6 @@ public class MainScreen extends Activity implements OnClickListener {
         	startActivity(i2);
         	break;
     	}
-    	
-
    }
 
 
@@ -74,6 +85,10 @@ public class MainScreen extends Activity implements OnClickListener {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Method that gets a random tstop from the tstop table in the SQLite Database
+	 * @return randTstop
+	 */
 	public String getRandomTstop() {
 		Cursor cursor;
 		String randTstop = null;

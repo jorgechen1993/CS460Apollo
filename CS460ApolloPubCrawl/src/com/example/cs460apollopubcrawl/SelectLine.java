@@ -38,7 +38,6 @@ public class SelectLine extends Activity implements OnItemSelectedListener {
 		dropMenu.setOnItemSelectedListener(this);   //set listener
 		
 		//add items to the array that will be used in the drop down menu
-		items.add("");
 		items.add("Green");
 		items.add("Orange");
 		items.add("Red");
@@ -62,12 +61,7 @@ public class SelectLine extends Activity implements OnItemSelectedListener {
                         	Toast.makeText(getBaseContext(), "Line was not selected", Toast.LENGTH_LONG).show();
                         }
                      }    
-        } );
-        
-
-		
-		
-		
+        } );        		
 	}
 
 	@Override
@@ -94,13 +88,13 @@ public class SelectLine extends Activity implements OnItemSelectedListener {
 	public void onItemSelected(AdapterView<?> parent, View v, int position,
 			long id) {
 		
-		if (position == 1) {
+		if (position == 0) {
 			subImage.setImageResource(R.drawable.green_line);
-		} else if (position == 2) {
+		} else if (position == 1) {
 			subImage.setImageResource(R.drawable.orange_line);
-		} else if (position == 3) {
+		} else if (position == 2) {
 			subImage.setImageResource(R.drawable.red_line);
-		} else if (position == 4) {
+		} else if (position == 3) {
 			subImage.setImageResource(R.drawable.blue_line);
 		} else {
 			subImage.setImageResource(R.drawable.subway_map);
@@ -110,5 +104,6 @@ public class SelectLine extends Activity implements OnItemSelectedListener {
 	}
 
 	public void onNothingSelected(AdapterView<?> parent) {
+		subImage.setImageResource(R.drawable.subway_map);
 	}
 }

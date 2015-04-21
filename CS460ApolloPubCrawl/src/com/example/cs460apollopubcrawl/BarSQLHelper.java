@@ -1,3 +1,10 @@
+/**
+ * Class that gets an ArrayList of type Bar and saves the data inside the ArrayList into
+ * a SQLite Database table
+ * 
+ * Created by Jorge Chen 04/16/2015
+ */
+
 package com.example.cs460apollopubcrawl;
 
 import android.content.ContentValues;
@@ -53,7 +60,11 @@ public class BarSQLHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	//add bar records to the table
+	/**
+	 * Gets an ArrayList of type Bar and reads every single element and puts them into
+	 * a SQLite Database table
+	 * @param list
+	 */
 	public void addBar(ArrayList<Bar> list){
 		
 		for (int i = 0; i < list.size(); i++){
@@ -80,7 +91,7 @@ public class BarSQLHelper extends SQLiteOpenHelper {
 			values.put(KEY_TYPE,type);
 			values.put(KEY_CLOSEST_STOP, closestStop);
 			db.insert(TABLE_NAME, null, values);
-			Log.d("SQLiteDemo Bar", name + " added");
+			Log.d("BarSQLHelper.java SQLite", name + " added");	//added to log to check if record was added
 	        db.close();
 		}
 	}

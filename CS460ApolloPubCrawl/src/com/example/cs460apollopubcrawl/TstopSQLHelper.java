@@ -1,3 +1,10 @@
+/**
+ * Class that gets an ArrayList of type Tstop and saves the data inside the ArrayList into
+ * a SQLite Database table
+ * 
+ * Created by Jorge Chen 04/16/2015
+ */
+
 package com.example.cs460apollopubcrawl;
 
 import android.content.ContentValues;
@@ -51,7 +58,11 @@ public class TstopSQLHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	//add tstop records to the tstop SQLite table
+	/**
+	 * Gets an ArrayList of type Tstop and reads every single element and puts them into
+	 * a SQLite Database table
+	 * @param list
+	 */
 	public void addTstop(ArrayList<TStop> list){
 		
 		for (int i = 0; i < list.size(); i++){
@@ -64,10 +75,11 @@ public class TstopSQLHelper extends SQLiteOpenHelper {
 			lineColor = tstop.getLineColor();
 			latitude = tstop.getStopLatitude();
 			longitude = tstop.getStopLongitude();
+			
 			SQLiteDatabase db = this.getWritableDatabase();
 			values = new ContentValues();
 			
-			
+			//adds values into the SQLite Database table
 			values.put(KEY_TSTOP_ID, id);
 			values.put(KEY_STOP_NAME, name);
 			values.put(KEY_TRANSFER_LOCATION, transferLocation);
@@ -76,7 +88,7 @@ public class TstopSQLHelper extends SQLiteOpenHelper {
 			values.put(KEY_STOP_LATITUDE, latitude);
 			values.put(KEY_STOP_LONGITUDE,longitude);
 			db.insert(TABLE_NAME, null, values);
-			Log.d("SQLiteDemo", name + " added");
+			Log.d("TstopSQLHelper.java SQLite", name + " added");	//added to log to check if the record was added
 	        db.close();
 		}
 	}

@@ -1,3 +1,16 @@
+/**
+ * Class that accesses the tstop table from a MySQL database
+ * and creates an ArrayList of Tstop object that is used to store all records
+ * from the table into the ArrayList
+ * 
+ * Input: all records from the tstop table from a MySQL server database
+ * Output: an ArrayList of type Tstop
+ * Error Handling: returns an exception if there was an error connecting to the MySQL database
+ * 
+ * Created by Jorge Chen on 04/05/2015
+ * 
+ */
+
 package com.example.cs460apollopubcrawl;
 
 import java.sql.Connection;
@@ -10,10 +23,19 @@ import java.util.ArrayList;
 import android.util.Log;
 
 public class TStopTable {
-	public ArrayList<TStop> tstopArray = new ArrayList();
-
-public TStopTable(){}
 	
+	public ArrayList<TStop> tstopArray = new ArrayList();
+	
+	/**
+	 * Empty constructor used to call on the methods of this calls
+	 */
+	public TStopTable(){}
+	
+	/**
+	 * Accessor method that accesses the MySQL database and gets all the records
+	 * from the tstop table and puts all the records into an ArrayList of type Tstop and returns it.
+	 * @return tstopArray
+	 */
 	public ArrayList<TStop> getData(){
 		String URL = "jdbc:mysql://frodo.bentley.edu:3306/cs460apollo";
         String username = "cs460Apollo";
@@ -27,9 +49,9 @@ public TStopTable(){}
             Log.e("JDBC", "Did not load driver");          
         }
         
-
         Statement stmt = null;
         Connection con=null;
+        
         try { //create connection to database
          con = DriverManager.getConnection (
             URL,
@@ -40,7 +62,7 @@ public TStopTable(){}
         ResultSet result = stmt.executeQuery(
             "SELECT * FROM cs460apollo.tstop ORDER BY Tstop_ID;");
         
-        //for each record in Bar table add Bar object to ArrayList and add bar data to log
+        //for each record in the Tstop table add it to an ArrayList of type Tstop
         while (result.next()) {
         tstopID = result.getString("Tstop_ID");
         stopName = result.getString("StopName");
@@ -61,11 +83,9 @@ public TStopTable(){}
         con.close();
     }
     catch (SQLException e) {
-    	Log.e("Bar", "SQL Error");
+    	Log.e("TStopTable.java Failure", "SQL Error");
       e.printStackTrace();
     }
 		return tstopArray;
-	} //run
-	
-
+	}	
 }

@@ -115,13 +115,13 @@ public class SelectStop extends Activity implements OnItemSelectedListener {
 		Intent intent = getIntent();
 		int line = intent.getIntExtra("line_color_num" , 0);
 		
-		if (line == 1) {
+		if (line == 0) {
 			subImage.setImageResource(R.drawable.green_line);
-		} else if (line == 2) {
+		} else if (line == 1) {
 			subImage.setImageResource(R.drawable.orange_line);
-		} else if (line == 3) {
+		} else if (line == 2) {
 			subImage.setImageResource(R.drawable.red_line);
-		} else if (line == 4) {
+		} else if (line == 3) {
 			subImage.setImageResource(R.drawable.blue_line);
 		} 
 		

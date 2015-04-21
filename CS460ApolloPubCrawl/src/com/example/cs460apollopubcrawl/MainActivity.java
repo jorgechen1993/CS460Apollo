@@ -1,3 +1,13 @@
+/**
+ * Main activity that has a progress bar that displays the progress of getting all records from 
+ * the tstop and bar table from the MySQL server database, inserting all records into ArrayLists, 
+ * placing elements from ArrayList into a SQLite database, and starting the next activity.
+ * 
+ * Created by Jorge Chen on 04/02/2015
+ * Modified by Jorge Chen on 04/16/2015
+ * 
+ */
+
 package com.example.cs460apollopubcrawl;
 
 import java.util.ArrayList;
@@ -23,7 +33,6 @@ public class MainActivity extends Activity {
 	private SQLiteDatabase db;
 	private TstopSQLHelper sqltstop = new TstopSQLHelper(this);
 	private BarSQLHelper sqlbar = new BarSQLHelper(this);
-	//private BarToTStopSQLHelper stopBarQuery = new BarToTStopSQLHelper(this);
 	public TStopTable stop = new TStopTable();
 	public BarTable bar = new BarTable();
 	public ArrayList<TStop> tstopArray;
@@ -32,7 +41,9 @@ public class MainActivity extends Activity {
 	private TextView msgWorking;
 	private boolean isRunning = true;
 	
-	//Create Handler object to handle messages placed on queue 
+	/**
+	 * Handler that manages the movement of the progress bar
+	 */
 	Handler handler = new Handler() {
 		
 		public void handleMessage(Message msg) {
@@ -69,6 +80,12 @@ public class MainActivity extends Activity {
         
     }
     
+    /**
+     * Background thread that grabs the records from all the tables in the MySQL database,
+     * inserts records into ArrayLists, puts all contents in the ArrayList into SQLite tables,
+     * sends a message to the handler of the class to advance the progress bar and starts a
+     * new activity once progress bar has been filled.
+     */
 	private Runnable background = new Runnable() {
 		public void run(){
 			
@@ -85,19 +102,18 @@ public class MainActivity extends Activity {
 			Log.d("SQLite", "Could not create SQLite Database");
 		}
 		
-		
+		//Puts the contents of the ArrayList into a SQLite database
 		sqltstop.onCreate(db);
 		sqlbar.onCreate(db);
-		//stopBarQuery.onCreate(db);
 		sqltstop.addTstop(tstopArray);
 		sqlbar.addBar(barArray); 	
-		//stopBarQuery.addRecords();
 		
+		//Handles the advance of the progressbar
 		try {
 			//for each iteration of loop, create a Message object and place on queue
 			for (int i = 0; i < 20 && isRunning; i++) {
 				Thread.sleep(200);
-				Message msg = handler.obtainMessage(i, "Hello");
+				Message msg = handler.obtainMessage(i, "Loading");
 				handler.sendMessage(msg);					
 			}
 		} catch (InterruptedException e) {
@@ -107,7 +123,8 @@ public class MainActivity extends Activity {
 			isRunning = false;
 			
 			}
-			
+		
+		//Starts next activity once the progress bar has been filled
 		Intent i = new Intent(getBaseContext(),MainScreen.class);
 		startActivity(i);
 		
