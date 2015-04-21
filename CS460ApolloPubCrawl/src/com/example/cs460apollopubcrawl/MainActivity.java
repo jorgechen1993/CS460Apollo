@@ -39,28 +39,7 @@ public class MainActivity extends Activity {
 	public ArrayList<Bar> barArray;
 	private ProgressBar progressBar;
 	private TextView msgWorking;
-	private boolean isRunning = true;
-	
-	/**
-	 * Handler that manages the movement of the progress bar
-	 */
-	Handler handler = new Handler() {
-		
-		public void handleMessage(Message msg) {
-			progressBar.incrementProgressBy(5);
-			
-			if (progressBar.getProgress() == progressBar.getMax()){
-				msgWorking.setText("Welcome!");	
-			}
-			else {
-				msgWorking.setText("Working..." +
-						progressBar.getProgress() +"%" );
-			}
-			//write message contents to log
-			Log.i("Message", (String)msg.obj + " " + msg.what);
-					
-		}
-	};
+	private boolean isRunning = true;	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +47,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        msgWorking = (TextView)findViewById(R.id.TextView01);
         
-		progressBar.setMax(100);
 		progressBar.setVisibility(View.VISIBLE);
-		progressBar.setProgress(0);
         
         t = new Thread(background);
         t.start();
@@ -106,23 +82,7 @@ public class MainActivity extends Activity {
 		sqltstop.onCreate(db);
 		sqlbar.onCreate(db);
 		sqltstop.addTstop(tstopArray);
-		sqlbar.addBar(barArray); 	
-		
-		//Handles the advance of the progressbar
-		try {
-			//for each iteration of loop, create a Message object and place on queue
-			for (int i = 0; i < 20 && isRunning; i++) {
-				Thread.sleep(200);
-				Message msg = handler.obtainMessage(i, "Loading");
-				handler.sendMessage(msg);					
-			}
-		} catch (InterruptedException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			// end the background thread
-			isRunning = false;
-			
-			}
+		sqlbar.addBar(barArray); 			
 		
 		//Starts next activity once the progress bar has been filled
 		Intent i = new Intent(getBaseContext(),MainScreen.class);

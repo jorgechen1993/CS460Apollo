@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name=".MainScreen"
-            android:label="Boston T Pahty" >
+            android:label="Boston T Pahty"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
             android:name=".PubCrawl"

@@ -6,32 +6,30 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/bohek_light_background"
+    android:background="@drawable/blurred_city"
     tools:context="com.example.cs460apollopubcrawl.MainActivity" >
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width ="fill_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="150dp"
-        android:src="@drawable/logo"
-    />
-    
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Working ...."
-        android:textSize="18sp"
-		android:textStyle="bold"
-		android:gravity="center"
-		android:layout_below="@+id/logo" />
+        android:src="@drawable/logo2"	
+        android:layout_centerVertical="true"
+        />
+    
+    <TextView 
+     	android:id="@+id/textView"
+     	android:layout_width="fill_parent"
+     	android:layout_height="wrap_content"
+     	android:layout_below="@+id/logo"
+     	android:gravity = "center"
+     	android:text="Loading.."  
+        />
     
     <ProgressBar
 	android:id="@+id/progressBar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_below="@+id/TextView01"
-	style="?android:attr/progressBarStyleHorizontal" />
+	android:layout_below="@+id/textView" />
 
 </RelativeLayout>
