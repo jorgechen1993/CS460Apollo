@@ -1,3 +1,7 @@
+/**
+ * Created by Jorge Chen 04/17/15
+ */
+
 package com.example.cs460apollopubcrawl;
 
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TabHost;
@@ -39,17 +44,26 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.CameraUpdateFactory;
 
-
-
-public class RandomPubCrawl extends Activity {
+public class RandomPubCrawl extends Activity implements OnClickListener {
 	
+	//instantiating the widgets
 	public GoogleMap myMap;
 	private TabHost tabs;
 	private static final float zoom = 14.0f;
+	private ListView listView;
+	private SimpleAdapter adapter;
+	private Button navigationButton;
+	private Button routingButton;
+	
+	//variables that use or hold values for creating the pub crawl
 	private String startingTstop;
 	private ArrayList<Bar> sqlBarArray;
 	private ArrayList<Bar> pubCrawlArray;
-	private ListView listView;
+	
+	//variables used in the option menu
+	final int PICK1 = Menu.FIRST + 1;
+	final int PICK2 = Menu.FIRST + 2;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +72,7 @@ public class RandomPubCrawl extends Activity {
 		
 		//initialize the arrays
 		sqlBarArray = new ArrayList<Bar>();
-		pubCrawlArray = new ArrayList<Bar>();
+		pubCrawlArray = new ArrayList<Bar>();			
 		
 		//Getting the initial tstop from previous activity
 		Intent intent = getIntent();
@@ -66,6 +80,12 @@ public class RandomPubCrawl extends Activity {
 		
 		//initialize the listview
 		listView = (ListView)findViewById(R.id.pubList);
+		
+		//initialize the buttons
+		navigationButton = (Button)findViewById(R.id.navigationButton);
+		navigationButton.setOnClickListener(this);
+		routingButton = (Button)findViewById(R.id.routingButton);
+		routingButton.setOnClickListener(this);
 		
 	    //setting up the tab host
         tabs=(TabHost)findViewById(R.id.tabhost);        
@@ -87,6 +107,41 @@ public class RandomPubCrawl extends Activity {
 		tabs.addTab(spec);             //put tab in TabHost container
 		
 		//Put the bars inside the list
+   	   populateList();
+				
+		
+		//-------------------------------------------------------------------------------------
+		
+		// Initialize a TabSpec for tab2 and add it to the TabHost
+		spec=tabs.newTabSpec("tag2");		//create new tab specification
+		spec.setContent(R.id.tab2);			//add view tab content
+		spec.setIndicator("Map");
+		tabs.addTab(spec);					//put tab in TabHost container
+		
+		//initializing and referencing of the map fragment
+		myMap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
+		myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+		//add markers to map
+		addMarkers(myMap);
+		
+		//map onclicklistener will display a info window on top of the marker
+		myMap.setOnMarkerClickListener( 
+        		new OnMarkerClickListener() {
+        			
+        			public boolean onMarkerClick(Marker m) {      				
+        				m.showInfoWindow();		
+        				return true;
+        			}
+        			
+        		}
+        );
+	}
+	
+	/**
+	 * Method that populates the listview with bars
+	 */
+	public void populateList(){
 	    final ArrayList<HashMap<String,String>> listHash = new ArrayList<HashMap<String,String>>();
 	    
 	    for (int i = 0; i < pubCrawlArray.size();i++){
@@ -103,43 +158,37 @@ public class RandomPubCrawl extends Activity {
 	    	listHash.add(temp);
 	    }
 	    
-	    SimpleAdapter adapter = new SimpleAdapter (
+	    adapter = new SimpleAdapter (
 	    	this,listHash, R.layout.custom_row_view, 
 	    	new String[] {"name","address","phone"},
 	    	new int[] {R.id.text1,R.id.text2,R.id.text3}
 	    );
-	    listView.setAdapter(adapter);	    	   
-				
+	    listView.setAdapter(adapter);	 
+	}
+	
+	/**
+	 * OnClickListener event execution of navigation and routing buttons
+	 * MAXIM AND DEREK IMPLEMENT YOUR METHOD FOR ROUTING AND NAVIGATION HERE
+	 */
+	public void onClick(View v) {
 		
-		//-------------------------------------------------------------------------------------
+		switch (v.getId()){
 		
-		// Initialize a TabSpec for tab2 and add it to the TabHost
-		spec=tabs.newTabSpec("tag2");		//create new tab specification
-		spec.setContent(R.id.tab2);			//add view tab content
-		spec.setIndicator("Map");
-		tabs.addTab(spec);					//put tab in TabHost container
+		case R.id.navigationButton:
+			//TODO FUNCTION FOR NAVIGATION
+		break;
 		
-		//initializing and referencing of the map fragment
-		myMap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
-		myMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		//myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(42.351479, -71.081127), zoom));
-
-		//add markers to map
-		addMarkers(myMap);
-		
-		myMap.setOnMarkerClickListener( 
-        		new OnMarkerClickListener() {
-        			
-        			public boolean onMarkerClick(Marker m) {      				
-        				m.showInfoWindow();		
-        				return true;
-        			}
-        			
-        		}
-        );
+		case R.id.routingButton:
+			//TODO FUNCTION FOR ROUTING
+		break;
+		}
 	}
 
-private void addMarkers(GoogleMap map) {
+	/**
+	 * Adds markers into the map
+	 * @param map
+	 */
+	private void addMarkers(GoogleMap map) {
 		
 		//markers for pubs
 		for (int i = 0; i < pubCrawlArray.size();i++){
@@ -197,21 +246,31 @@ private void addMarkers(GoogleMap map) {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.random_pub_crawl, menu);
+		super.onCreateOptionsMenu(menu);
+		MenuItem item1 = menu.add(0, PICK1, Menu.NONE, "Randomize Crawl");
+		MenuItem item2 = menu.add(0, PICK2, Menu.NONE, "Shortest Path Crawl");
 		return true;
 	}
 
+	/**
+	 * MAXIM AND DEREK IMPLEMENT YOUR METHOD TO CALCULATED SHORTEST PATH HERE
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		int itemID = item.getItemId();  //get id of menu item picked	   	    
+	    
+	    switch (itemID) {
+	    case PICK1 :
+	    	randomizeList();
+	    	populateList();
+	    	return true;
+	    case PICK2 :
+	    	//TODO METHOD PLACE HERE TO CALCULATE SHORTEST PATH AND THEN CALL THE "populateList()" METHOD AT THE END
+	    	return true;
+	    default: super.onOptionsItemSelected(item);
+	    }
+	   		   
+	    return false;
 	}
 	
 	public void getBars() {
@@ -242,6 +301,9 @@ private void addMarkers(GoogleMap map) {
 	    db.close(); //end of SQLite
 	}
 	
+	/**
+	 * Method that randomizes the number of bars in the crawl and the pubs in the pub crawl
+	 */
 	public void randomizePubCrawl(){
 		int array_size = sqlBarArray.size();
 		int crawl_size;
@@ -265,4 +327,37 @@ private void addMarkers(GoogleMap map) {
 		
 		pubCrawlArray = tempArray2;
 	}
+	
+	/**
+	 * Method that randomizes the list of pubs in the pub crawl
+	 */
+	public void randomizeList(){
+		int crawl_size = pubCrawlArray.size();
+		ArrayList<Bar> tempArray = new ArrayList<Bar>();
+		ArrayList<Bar> tempArray2 = new ArrayList<Bar>();		
+		
+		//Place all bars in the sqlBarArray into tempArray
+		tempArray = pubCrawlArray;
+		
+		//Generate a random list of bars
+		for (int i = 0; i < crawl_size; i++) {
+			
+			int random = (int)((Math.random() * (tempArray.size() - 1 )) + 0);
+			
+			tempArray2.add(tempArray.get(random));
+			tempArray.remove(random);									
+		}
+		
+		pubCrawlArray = tempArray2;
+	}
+	
+	//---------------------------------------------------------------------------------------------------------------------------
+	
+	/** MAXIM AND DEREK: ANY ADDITIONAL METHODS WRITE THEM BELOW THIS LINE. HERE IS WHAT I CAN DO TO HELP YOU GUYS:
+	 *  THE "sqlBarArray" ARRAYLIST AUTOMATICALLY HOLDS ALL THE BARS IN THE PUB CRAWL, WHAT YOU WILL WANT TO DO IS GET 
+	 *  THE LAT AND LONG FROM THE ARRAY BY CREATING A BAR OBJECT AND STORING
+	 *  CONTENTS OF EACH ELEMENT INTO A SEPARATE BAR OBJECT. YOU WILL HAVE TO USE LOOPS BECAUSE ONLY ONE BAR OBJECT CAN BE
+	 *  CREATED AT A TIME. ONCE YOU HAVE EXTRACTED THE COORDINATES CREATE METHOD THAT WILL CALCULATE SHORTEST PATH AND DO NAVIGATION
+	 *  AND ROUTING WHERE I SET UP THE ONCLICKLISTENER FOR YOU GUYS. GOOD LUCK.
+	*/
 }

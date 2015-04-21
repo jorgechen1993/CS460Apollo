@@ -53,13 +53,9 @@ public class SelectLine extends Activity implements OnItemSelectedListener {
    
                      public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(),SelectStop.class);
-                        if (menuItemNum > 0) {
                         i.putExtra("line_color", menuItemSelected);
                         i.putExtra("line_color_num", menuItemNum);
                         startActivity(i);
-                        } else {
-                        	Toast.makeText(getBaseContext(), "Line was not selected", Toast.LENGTH_LONG).show();
-                        }
                      }    
         } );        		
 	}

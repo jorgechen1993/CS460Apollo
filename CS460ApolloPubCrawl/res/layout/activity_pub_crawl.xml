@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/tabhost" android:layout_width="match_parent"
+	android:id="@+id/tabhost" 
+	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	<LinearLayout android:orientation="vertical"
-		android:layout_width="match_parent" android:layout_height="match_parent">
+	
+	<LinearLayout 
+	    android:orientation="vertical"
+		android:layout_width="match_parent" 
+		android:layout_height="match_parent">
+		
 		<TabWidget android:id="@android:id/tabs"
 			android:layout_width="match_parent" android:layout_height="wrap_content" 
 			/>
@@ -13,25 +18,51 @@
 
 			<!-- first tab -->
 			<LinearLayout android:id="@+id/tab1"
-				android:orientation="vertical" android:layout_width="match_parent"
+				android:orientation="vertical" 
+				android:layout_width="match_parent"
 				android:layout_height="match_parent">
 				<ListView
 	   			android:id="@+id/pubList"
 				android:layout_width ="fill_parent"
 				android:layout_height="fill_parent"
-				android:layout_weight="2"
 				android:drawSelectorOnTop="false" />
 			</LinearLayout>
 
 			<!--  second tab -->
 			<LinearLayout android:id="@+id/tab2"
-				android:orientation="vertical" android:layout_width="match_parent"
-				android:layout_height="match_parent">
+				android:orientation="vertical" 
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:weightSum = "2">			
 				<include 
        			 	android:id="@+id/map"
         			android:layout_width="match_parent"
-        			android:layout_height="match_parent"
+        			android:layout_height="0dp"
+        			android:layout_weight="1.95"
         			layout="@layout/map_frag" />
+				<LinearLayout
+				    android:layout_width = "fill_parent"
+				    android:layout_height = "wrap_content"
+				    android:orientation="horizontal"
+				    android:weightSum="2"	>
+				<Button 
+				    android:id="@+id/navigationButton"
+				    android:layout_width= "0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_below = "@+id/map"	  
+				    android:layout_weight = "1"
+				    android:text="Navigation"
+				    />
+				<Button 
+				    android:id="@+id/routingButton"
+				    android:layout_width= "0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_below = "@+id/map"
+				    android:layout_toRightOf = "@+id/navigationButton"				  	  
+				    android:layout_weight = "1"
+				    android:text="Routing"
+				    />
+				</LinearLayout>
 			</LinearLayout>
 
 		</FrameLayout>
