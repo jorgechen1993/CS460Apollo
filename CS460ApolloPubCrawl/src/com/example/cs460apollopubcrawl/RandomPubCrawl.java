@@ -107,7 +107,7 @@ public class RandomPubCrawl extends Activity implements OnClickListener {
 		tabs.addTab(spec);             //put tab in TabHost container
 		
 		//Put the bars inside the list
-   	   populateList();
+   	   	populateList();
 				
 		
 		//-------------------------------------------------------------------------------------
