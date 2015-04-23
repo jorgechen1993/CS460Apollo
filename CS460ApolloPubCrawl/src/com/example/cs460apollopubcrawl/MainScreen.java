@@ -11,10 +11,12 @@ package com.example.cs460apollopubcrawl;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.*;
 import android.database.Cursor;
 import android.content.Context;
@@ -36,9 +38,7 @@ public class MainScreen extends Activity implements OnClickListener {
         button1.setOnClickListener(this);
         
         button2 = (Button)findViewById(R.id.button2);
-        button2.setOnClickListener(this);
-
-
+        button2.setOnClickListener(this);        
 	}
 	
 	/**
@@ -62,8 +62,15 @@ public class MainScreen extends Activity implements OnClickListener {
         	startActivity(i2);
         	break;
     	}
-   }
+   }    
 
+    @Override
+    public void onBackPressed() {
+    	Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

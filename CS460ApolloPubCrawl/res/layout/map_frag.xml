@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     class="com.google.android.gms.maps.MapFragment"
-    map:cameraTargetLat="41.498370"
-    map:cameraTargetLng="-81.693883"
     map:cameraZoom="14"  
     map:uiCompass="true"   
     map:mapType="normal"
