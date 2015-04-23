@@ -372,6 +372,18 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int useViewLifecycle=0x7f010013;
+        /**  Defines the set of transition to be used between activities 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>slide</code></td><td>1</td><td></td></tr>
+<tr><td><code>none</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int windowTransitionStyle=0x7f010025;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -473,53 +485,54 @@ containing a value of this type.
         public static final int subway_map=0x7f020029;
     }
     public static final class id {
-        public static final int action_settings=0x7f07002f;
+        public static final int action_settings=0x7f070030;
         public static final int adjust_height=0x7f070002;
         public static final int adjust_width=0x7f070001;
         public static final int book_now=0x7f070012;
-        public static final int button1=0x7f07001d;
-        public static final int button2=0x7f07001e;
-        public static final int buttonGo=0x7f070029;
+        public static final int button1=0x7f07001e;
+        public static final int button2=0x7f07001f;
+        public static final int buttonGo=0x7f07002a;
         public static final int buyButton=0x7f07000c;
         public static final int buy_now=0x7f070011;
         public static final int buy_with_google=0x7f070010;
         public static final int classic=0x7f070014;
-        public static final int crawlList=0x7f07002e;
+        public static final int crawlList=0x7f07002f;
         public static final int donate_with_google=0x7f070013;
-        public static final int dropMenu=0x7f070028;
+        public static final int dropMenu=0x7f070029;
         public static final int grayscale=0x7f070015;
         public static final int holo_dark=0x7f070007;
         public static final int holo_light=0x7f070008;
         public static final int hybrid=0x7f070006;
-        public static final int image=0x7f07001c;
-        public static final int linearLayout=0x7f070027;
-        public static final int list=0x7f07002a;
-        public static final int logo=0x7f070017;
-        public static final int logoImage=0x7f07001a;
-        public static final int map=0x7f070023;
+        public static final int image=0x7f07001d;
+        public static final int linearLayout=0x7f070028;
+        public static final int list=0x7f07002b;
+        public static final int logo=0x7f070018;
+        public static final int logoImage=0x7f07001b;
+        public static final int map=0x7f070024;
         public static final int match_parent=0x7f07000e;
         public static final int monochrome=0x7f070016;
-        public static final int navigationButton=0x7f070024;
+        public static final int navigationButton=0x7f070025;
         public static final int none=0x7f070000;
         public static final int normal=0x7f070003;
         public static final int production=0x7f070009;
-        public static final int progressBar=0x7f070019;
-        public static final int pubList=0x7f070021;
-        public static final int routingButton=0x7f070025;
+        public static final int progressBar=0x7f07001a;
+        public static final int pubList=0x7f070022;
+        public static final int routingButton=0x7f070026;
         public static final int sandbox=0x7f07000a;
         public static final int satellite=0x7f070004;
         public static final int selectionDetails=0x7f07000d;
+        public static final int slide=0x7f070017;
         public static final int strict_sandbox=0x7f07000b;
-        public static final int tab1=0x7f070020;
-        public static final int tab2=0x7f070022;
-        public static final int tabhost=0x7f07001f;
+        public static final int tab1=0x7f070021;
+        public static final int tab2=0x7f070023;
+        public static final int tabhost=0x7f070020;
         public static final int terrain=0x7f070005;
-        public static final int text1=0x7f07002b;
-        public static final int text2=0x7f07002c;
-        public static final int text3=0x7f07002d;
-        public static final int textView=0x7f070018;
-        public static final int textView01=0x7f070026;
-        public static final int title=0x7f07001b;
+        public static final int text1=0x7f07002c;
+        public static final int text2=0x7f07002d;
+        public static final int text3=0x7f07002e;
+        public static final int textView=0x7f070019;
+        public static final int textView01=0x7f070027;
+        public static final int title=0x7f07001c;
         public static final int wrap_content=0x7f07000f;
     }
     public static final class integer {
@@ -551,8 +564,8 @@ containing a value of this type.
     }
     public static final class string {
         public static final int accept=0x7f060002;
-        public static final int action_settings=0x7f060025;
-        public static final int app_name=0x7f060023;
+        public static final int action_settings=0x7f060028;
+        public static final int app_name=0x7f060026;
         /**   Text for notification shown when the Android Wear apps needs to be updated. Only shown on the wearable. [CHAR LIMIT=NONE] 
          */
         public static final int common_android_wear_notification_needs_update_text=0x7f060009;
@@ -622,6 +635,12 @@ containing a value of this type.
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
          */
         public static final int common_google_play_services_notification_ticker=0x7f060006;
+        /**  Message in confirmation dialog informing the user that the account could not be signed in. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_sign_in_failed_text=0x7f060024;
+        /**  Title of confirmation dialog informing the user that the account could not be signed in. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_sign_in_failed_title=0x7f060023;
         /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
         services [CHAR LIMIT=NONE] 
          */
@@ -652,22 +671,25 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060020;
+        /**  Message in confirmation dialog informing the user that one of the APIs they attepmt to access is not available. [CHAR LIMIT=NONE] 
+         */
+        public static final int commono_google_play_services_api_unavailable_text=0x7f060022;
         public static final int create_calendar_message=0x7f060005;
         public static final int create_calendar_title=0x7f060004;
         public static final int decline=0x7f060003;
-        public static final int hello_world=0x7f060024;
+        public static final int hello_world=0x7f060027;
         public static final int store_picture_message=0x7f060001;
         public static final int store_picture_title=0x7f060000;
-        public static final int title_activity_main_screen=0x7f060026;
-        public static final int title_activity_pub_crawl=0x7f060027;
-        public static final int title_activity_random_pub_crawl=0x7f06002b;
-        public static final int title_activity_select_line=0x7f060028;
-        public static final int title_activity_select_pubs=0x7f060029;
-        public static final int title_activity_select_stop=0x7f06002a;
+        public static final int title_activity_main_screen=0x7f060029;
+        public static final int title_activity_pub_crawl=0x7f06002a;
+        public static final int title_activity_random_pub_crawl=0x7f06002e;
+        public static final int title_activity_select_line=0x7f06002b;
+        public static final int title_activity_select_pubs=0x7f06002c;
+        public static final int title_activity_select_stop=0x7f06002d;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
-        public static final int wallet_buy_button_place_holder=0x7f060022;
+        public static final int wallet_buy_button_place_holder=0x7f060025;
     }
     public static final class style {
         /** 
@@ -783,6 +805,38 @@ containing a value of this type.
           @attr name com.example.cs460apollopubcrawl:adUnitId
         */
         public static final int AdsAttrs_adUnitId = 2;
+        /**  Attributes that can be specified to define a custom theme 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CustomWalletTheme_windowTransitionStyle com.example.cs460apollopubcrawl:windowTransitionStyle}</code></td><td> Defines the set of transition to be used between activities </td></tr>
+           </table>
+           @see #CustomWalletTheme_windowTransitionStyle
+         */
+        public static final int[] CustomWalletTheme = {
+            0x7f010025
+        };
+        /**
+          <p>
+          @attr description
+           Defines the set of transition to be used between activities 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>slide</code></td><td>1</td><td></td></tr>
+<tr><td><code>none</code></td><td>2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.example.cs460apollopubcrawl:windowTransitionStyle
+        */
+        public static final int CustomWalletTheme_windowTransitionStyle = 0;
         /**  Attributes for LoadingImageView 
            <p>Includes the following attributes:</p>
            <table>
